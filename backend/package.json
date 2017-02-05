@@ -1,0 +1,25 @@
+{
+  "name": "smart-speech",
+  "version": "1.0.0",
+  "description": "Using Nuance to track the inventory of Tim horton's stock",
+  "main": "app.js",
+  "dependencies": {
+    "aws-sdk": "^2.9.0",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulmi/hackatown-naunce.git"
+  },
+  "author": "Abdulmi & SufTout",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abdulmi/hackatown-naunce/issues"
+  },
+  "homepage": "https://github.com/abdulmi/hackatown-naunce#readme"
+}
