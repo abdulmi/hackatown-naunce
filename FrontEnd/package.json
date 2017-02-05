@@ -1,0 +1,36 @@
+{
+  "name": "hackatown-naunce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulmi/hackatown-naunce.git"
+  },
+  "keywords": [],
+  "author": "Sufien Tout <stout@uwaterloo.ca>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdulmi/hackatown-naunce/issues"
+  },
+  "homepage": "https://github.com/abdulmi/hackatown-naunce#readme",
+  "dependencies": {
+    "material-ui": "^0.16.7",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "react-hot-loader": "^1.3.1",
+    "css-loader": "^0.26.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.1.0-beta.22",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
