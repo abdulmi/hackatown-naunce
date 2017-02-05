@@ -8,5 +8,13 @@
   <body>
     <div id="app" />
     <script src="bundle.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script>
+    var socket = io("http://localhost:3050")
+    socket.on("refresh",function(msg){
+        console.log("Refreshing ...")
+        location.reload();
+    })
+  </script>
   </body>
 </html>

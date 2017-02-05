@@ -6,7 +6,8 @@
   "dependencies": {
     "aws-sdk": "^2.9.0",
     "body-parser": "^1.16.0",
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "socket.io": "^1.7.2"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,6 +1,9 @@
 var AWS = require("aws-sdk");
 var settings = require("../settings.js")
 var app = require("express")()
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 
 var port = process.env.PORT || 3050;
 
@@ -162,10 +165,16 @@ app.post('/api/item/decrement', function(req,res) {
       } else {
           console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
           res.send(data)
+          io.emit("refresh")
+          console.log("sending EMIT ...")
       }
   });
 })
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
 // start the server
-app.listen(port);
+http.listen(port);
 console.log('Server started! At http://localhost:' + port);
