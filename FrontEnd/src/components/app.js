@@ -1,22 +1,46 @@
-import React from 'react';
-import Title from './Title'
-import Box from './Box'
+import React, {Component} from 'react';
+import Title from './Title';
+import Box from './Box';
+import request from 'request';
+import Menu from '../../menu.json';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-export default class App extends React.Component {
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            unfiltered: []
+        }
+        this.grab();
+    }
+    httpGetAsync(url, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.responseText);
+        }
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send(null);
+    }
+    grab() {
+        this.httpGetAsync(this.props.url, (res) => {
+            res = JSON.parse(res)
+            this.setState({"unfiltered":res["Items"]});
+        })
+    }
     render() {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
                 <div>
-                    <Title/>
-                    <Box type="Donuts" src="../../imgs/donut.svg" items={[{type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}]}/>
-                    <Box type="Timbits" src="../../imgs/timbit.svg" items={[{type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}]}/>
-                    <Box type="Muffins" src="../../imgs/muffin.svg" items={[{type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}]}/>
-                    <Box type="Cookies" src="../../imgs/food.svg" items={[{type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}]}/>
-                    <Box type="Pastries" src="../../imgs/croissant.svg" items={[{type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}]}/>
-                    <Box type="Bagels" src="../../imgs/bagel.svg" items={[{type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}, {type:"Chocolate", amount: 23}]}/>
+                    <Title text="Tim Horton's Baked Goods Inventory"/>
+                    {Object.keys(Menu).map((key) => {
+                        var filtered = this.state.unfiltered.filter((item) => {
+                            return (new RegExp(Menu[key].pattern)).test(item.type)
+                        })
+                        return <Box title={key} src={Menu[key].src} items={filtered}/>
+                    })}
                 </div>
             </MuiThemeProvider>
         );

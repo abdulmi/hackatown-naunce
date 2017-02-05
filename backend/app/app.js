@@ -7,7 +7,11 @@ var port = process.env.PORT || 3030;
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 // routes will go here
 
 
@@ -35,7 +39,7 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 //
 //
 //
-//
+
 // var params = {
 //     TableName : "Products",
 //     KeySchema: [
@@ -121,7 +125,7 @@ app.post('/api/item/increment', function(req,res) {
       },
       UpdateExpression: "set freq = freq + :val",
       ExpressionAttributeValues:{
-          ":val":1
+          ":val":req.body.bought
       },
       ReturnValues:"UPDATED_NEW"
   };
@@ -144,10 +148,10 @@ app.post('/api/item/decrement', function(req,res) {
           "type": req.body.type
       },
       UpdateExpression: "set freq = freq + :val",
-      ConditionExpression: "freq > :num",
+      ConditionExpression: ":val <= :num",
       ExpressionAttributeValues:{
           ":num":0,
-          ":val":-1
+          ":val":req.body.bought
       },
       ReturnValues:"UPDATED_NEW"
   };

@@ -1,0 +1,95 @@
+{
+    "Donuts": {
+        "src": "./imgs/donut.svg",
+        "pattern": ".*(?:D|d)onut.*",
+        "items": [
+            "Apple Fritter Donut",
+            "Chocolate Dip Donut",
+            "Honey Dip Donut",
+            "Vanilla Dip Donut",
+            "Maple Dip Donut",
+            "Chocolate Glazed Donut",
+            "Double Chocolate Donut",
+            "OId Fashion Plain Donut",
+            "Old Fashion Glazed Donut",
+            "Sour Cream Plain Donut",
+            "Strawberry Vanilla Donut",
+            "Strawberry Donut",
+            "Boston Cream Donut",
+            "Canadian Maple Donut",
+            "Sour Cream Glazed Donut",
+            "Honey Cruller Donut",
+            "Blueberry Donut"
+        ]
+    },
+    "Timbits": {
+        "src": "./imgs/timbit.svg",
+        "pattern": ".*(?:T|t)imbit.*",
+        "items": [
+            "Apple Fritter Timbit",
+            "Honey Dip Timbit",
+            "Old Fashion Plain Timbit",
+            "Old Fashion Glazed Timbit",
+            "Chocolate Glazed Timbit",
+            "Sour Cream Glazed Timbit",
+            "Blueberry Timbit",
+            "Strawberry Timbit",
+            "Raspberry Timbit",
+            "Lemon Timbit"
+        ]
+    },
+    "Muffins": {
+        "src": "./imgs/muffin.svg",
+        "pattern": ".*(?:M|m)uffin.*",
+        "items": [
+            "Chocolate Chip Muffin",
+            "Fruit Explosion Muffin",
+            "Wild Blueberry Muffin",
+            "Whole Grain Carrot Orange Muffin"
+        ]
+    },
+    "Cookies": {
+        "src": "./imgs/cookie.svg",
+        "pattern": ".*(?:C|c)ookie.*",
+        "items": [
+            "Chocolate Chunk Cookie",
+            "Peanut Butter Cookie",
+            "Triple Chocolate Cookie",
+            "White Chocolate Macadamia Nut Cookie",
+            "Oatmeal Raisin Spice Cookie",
+            "Double Chocolate Cookie filled with Peanut Butter",
+            "Red Velvet Cookie filled with Cream Cheese",
+            "Lemon Shortbread Cookie filled with Raspberry"
+        ]
+    },
+    "Pastries": {
+        "src": "./imgs/croissant.svg",
+        "pattern": ".*(?:(?:C|c)roissant|(?:D|d)anish|(?:B|b)iscuit|(?:P|p)astry|(?:R|r)oll).*",
+        "items": [
+            "Plain Croissant",
+            "Cheese Croissant",
+            "Maple Pecan Danish",
+            "Chocolate Pastry",
+            "Cheese Tea Biscuit",
+            "Raisin Tea Biscuit",
+            "Frosted Cinnamon Roll",
+            "Glazed Cinnamon Roll"
+        ]
+    },
+    "Bagels": {
+        "src": "./imgs/bagel.svg",
+        "pattern": ".*(?:Bagel|bagel).*",
+        "items": [
+            "Plain Bagel",
+            "Everything Bagel",
+            "Cinnamon Raisin Bagel",
+            "Four Cheese Bagel",
+            "Sesame Seed Bagel",
+            "Twelve Grain Bagel",
+            "Sundried Tomato Asiago Specialty Bagel",
+            "Maple Cinnamon French Toast Specialty Bagel",
+            "Jalapeno Asiago Mozzarella Specialty Bagel",
+            "Pretzel Bagel"
+        ]
+    }
+}

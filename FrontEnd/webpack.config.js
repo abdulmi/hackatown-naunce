@@ -2,6 +2,12 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+    node: {
+        // console: 'empty',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
+    },
     devtool: 'inline-source-map',
     entry: [
         'webpack-dev-server/client?http://127.0.0.1:8080/',
@@ -17,6 +23,9 @@ module.exports = {
         extensions: ['', '.js']
     },
     module: {
+        preLoaders: [
+            { test: /\.json$/, loader: 'json'},
+        ],
         loaders: [
         {
             test: /\.jsx?$/,
