@@ -2,7 +2,7 @@ var AWS = require("aws-sdk");
 var settings = require("../settings.js")
 var app = require("express")()
 
-var port = process.env.PORT || 3030;
+var port = process.env.PORT || 3050;
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
@@ -121,7 +121,7 @@ app.post('/api/item/increment', function(req,res) {
       },
       UpdateExpression: "set freq = freq + :val",
       ExpressionAttributeValues:{
-          ":val":1
+          ":val":parseInt(req.body.bought)
       },
       ReturnValues:"UPDATED_NEW"
   };
@@ -143,11 +143,10 @@ app.post('/api/item/decrement', function(req,res) {
       Key:{
           "type": req.body.type
       },
-      UpdateExpression: "set freq = freq + :val",
-      ConditionExpression: "freq > :num",
+      UpdateExpression: "set freq = freq - :val",
+      ConditionExpression: ":val <= freq",
       ExpressionAttributeValues:{
-          ":num":0,
-          ":val":-1
+          ":val":parseInt(req.body.bought)
       },
       ReturnValues:"UPDATED_NEW"
   };
