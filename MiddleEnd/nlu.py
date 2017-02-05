@@ -18,9 +18,11 @@ from aiohttp import _ws_impl as websocket
 import pyaudio
 import speex
 from copy import deepcopy
+from analyze import analyze
+import requests
 
 WS_KEY = b"258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
-
+host = "http://localhost:3050/api/item/decrement"
 
 class WebsocketConnection:
 
@@ -180,7 +182,7 @@ def understand_text(loop, url, app_id, app_key, user_id, context_tag, text_to_un
     })
 
     tp, msg = yield from client.receive()
-    log(msg)  # Should be a connected message
+    # log(msg)  # Should be a connected message
 
     client.send_message({
         'message': 'query_begin',
@@ -212,7 +214,7 @@ def understand_text(loop, url, app_id, app_key, user_id, context_tag, text_to_un
 
     while True:
         tp, msg = yield from client.receive()
-        log(msg)
+        # log(msg)
 
         if msg['message'] == 'query_end':
             break
@@ -247,7 +249,7 @@ def understand_audio(loop, url, app_id, app_key, user_id, context_tag=None, lang
     })
 
     tp, msg = yield from client.receive()
-    log(msg)  # Should be a connected message
+    # log(msg)  # Should be a connected message
 
     client.send_message({
         'message': 'query_begin',
@@ -340,7 +342,7 @@ def understand_audio(loop, url, app_id, app_key, user_id, context_tag=None, lang
 
         if receivetask.done():
             tp, msg = receivetask.result()
-            log(msg)
+            # log(msg)
 
             if msg['message'] == 'query_end':
                 client.close()
@@ -359,7 +361,19 @@ def understand_audio(loop, url, app_id, app_key, user_id, context_tag=None, lang
     while True:
         yield from asyncio.wait((receivetask,), loop=loop)
         tp, msg = receivetask.result()
+        #msg here is the JSON
+        # print("HERE")
+        # print(msg)
         log(msg)
+        newMsg = analyze(msg)
+        print("Posting this to dynamodb...")
+        print(newMsg)
+        if len(newMsg) != 0:
+            for x in range(0,len(newMsg)):
+                r = requests.post(host,newMsg[x])
+                print("post request result")
+                print(r)
+
 
         if msg['message'] == 'query_end':
             break
@@ -383,7 +397,7 @@ def upload_concept_data_for_user(loop, url, app_id, app_key, user_id, concept_id
     })
 
     tp, msg = yield from client.receive()
-    log(msg)  # Should be a connected message
+    # log(msg)  # Should be a connected message
 
     client.send_message({
         'message': 'query_begin',
@@ -429,7 +443,7 @@ def upload_concept_data_for_user(loop, url, app_id, app_key, user_id, concept_id
 
     while True:
         tp, msg = yield from client.receive()
-        log(msg)
+        # log(msg)
 
         if msg['message'] in ['query_end','disconnect']:
             break
@@ -450,7 +464,7 @@ def wipe_concept_data_for_user(loop, url, app_id, app_key, user_id):
     })
 
     tp, msg = yield from client.receive()
-    log(msg)  # Should be a connected message
+    # (msg)  # Should be a connected message
 
     client.send_message({
         'message': 'query_begin',
@@ -466,7 +480,7 @@ def wipe_concept_data_for_user(loop, url, app_id, app_key, user_id):
 
     while True:
         tp, msg = yield from client.receive()
-        log(msg)
+        # log(msg)
 
         if msg['message'] in ['query_end','disconnect']:
             break
